@@ -1,0 +1,5 @@
+ul.nav.nav-tabs
+  li*{ class: ('active' if 'relays' === controller_name) }
+    = link_to 'Detail', relay_path(@relay)
+  li*{ class: ('active' if 'relay_logs' === controller_name) }
+    = link_to 'Logs', relay_relay_logs_path(@relay)

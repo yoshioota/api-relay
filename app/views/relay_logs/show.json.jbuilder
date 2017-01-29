@@ -1,0 +1,1 @@
+json.partial! "relay_logs/relay_log", relay_log: @relay_log

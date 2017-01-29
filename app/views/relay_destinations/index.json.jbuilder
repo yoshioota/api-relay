@@ -1,0 +1,1 @@
+json.array! @relay_destinations, partial: 'relay_destinations/relay_destination', as: :relay_destination

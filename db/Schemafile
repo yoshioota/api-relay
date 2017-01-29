@@ -1,0 +1,30 @@
+create_table :relays do |t|
+  t.string :title
+  t.integer :max_logs_size
+  t.integer :active_relay_destination_id
+
+  t.timestamps
+end
+
+create_table :relay_destinations do |t|
+  t.integer :relay_id, null: false
+  t.string :base_url, null: false
+
+  t.timestamps
+end
+add_index :relay_destinations, :relay_id
+
+create_table :relay_logs do |t|
+  t.integer :relay_id, null: false
+  t.string :request_method
+  t.string :request_url
+  t.text :request_parameters
+  t.text :request_headers
+  t.binary :request_body
+  t.integer :response_status
+  t.text :response_headers
+  t.binary :response_body
+
+  t.timestamps
+end
+add_index :relay_logs, :relay_id

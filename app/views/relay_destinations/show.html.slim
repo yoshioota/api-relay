@@ -1,0 +1,10 @@
+p
+  strong Relay:
+  = @relay_destination.relay_id
+p
+  strong Url:
+  = @relay_destination.base_url
+
+/= link_to 'Edit', edit_relay_destination_path(@relay_destination)
+/'|
+/= link_to 'Back', relay_destinations_path

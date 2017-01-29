@@ -1,0 +1,10 @@
+= bootstrap_form_for @relay do |f|
+  = render 'ar_err_check', record: f.object
+
+  = f.text_field :title, autofocus: true
+  = f.number_field :max_logs_size
+
+  - unless @relay.new_record?
+    = f.select :active_relay_destination_id, @relay.relay_destinations.all.collect { |p| [ p.base_url, p.id ] }
+
+  .actions = f.submit class: 'btn btn-primary'

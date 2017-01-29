@@ -1,0 +1,21 @@
+h1 Listing relay_destinations
+
+div = link_to 'Relays', relays_path
+
+div = link_to '+ New Relay destination', new_relay_relay_destination_path(@relay), class: 'btn btn-primary'
+
+table.table
+  thead
+    tr
+      th Base Url
+      th
+      th
+      th
+
+  tbody
+    - @relay_destinations.each do |relay_destination|
+      tr
+        td = relay_destination.base_url
+        td = link_to 'Show', [relay_destination.relay, relay_destination]
+        td = link_to 'Edit', edit_relay_relay_destination_path(relay_destination.relay, relay_destination)
+        td = link_to 'Destroy', [relay_destination.relay, relay_destination], data: { confirm: 'Are you sure?' }, method: :delete

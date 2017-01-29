@@ -1,0 +1,53 @@
+= render 'shared/relay_tabs'
+
+h1 Logs
+
+#relay-logs-app relay-id = '#{@relay.id}'
+  div.div-striped v-for = "relayLog in relayLogs" style = 'padding: 5px;'
+    = link_to 'javascript:void(0)', '@click' => 'selectRelayLogHeader(relayLog)', class: 'row display-block' do
+      .col-sm-1() \#{{relayLog.id}}
+      .col-sm-8()
+        span.label.label-lg class = "{{responseLabelClass(relayLog)}}"
+          |{{relayLog.response_status}}
+        |&nbsp;
+        |[{{relayLog.request_method}}]&nbsp;
+        |{{relayLog.request_url}}
+      .col-sm-3() {{relayLog.created_at}}
+
+    div v-if = "relayLog.visible"
+      h1 Request
+      div style = 'padding-left: 20px; padding-right: 10px;'
+        h4 Request Headers
+        table.table.table-bordered.table-striped.table-condensed
+          tr
+            td.word-break-all() {{relayLog.request_headers}}
+
+        h4 Request Parameters
+        table.table.table-bordered.table-striped.table-condensed
+          tr
+            td.word-break-all() {{relayLog.request_parameters}}
+
+        h4 Request Body
+        .mb-5px v-if = 'relayLog.request_body_encoded'
+          span.label.label-info Base 64 Encoded
+        pre.white-space-pre-wrap v-if = 'relayLog.request_body_if_fail_base64'
+          = '{{relayLog.request_body_if_fail_base64}}'
+
+      hr
+
+      h1 Response
+      div style = 'padding-left: 20px; padding-right: 10px;'
+        div
+          h4 Status
+          span.label.label-lg class = "{{responseLabelClass(relayLog)}}"
+            |{{relayLog.response_status}}
+        div
+          h4 Response Headers
+          table.table.table-bordered.table-striped.table-condensed
+            tr
+              td.word-break-all() {{relayLog.response_headers}}
+          h4 Response Body
+          .mb-5px v-if = 'relayLog.response_body_encoded'
+            label.label.label-info.mb-5px Base 64 Encoded
+          pre.white-space-pre-wrap
+            = '{{relayLog.response_body_if_fail_base64}}'

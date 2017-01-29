@@ -1,0 +1,30 @@
+h1 Listing relays
+
+= link_to '+ New Relay', new_relay_path, class: 'btn btn-default btn-primary'
+
+#relays-app
+  table.table
+    thead
+      tr
+        th ID
+        th Title
+        th Max logs size
+        th Active relay destination
+        th
+
+    tbody
+      tr v-for = 'relay in relays'
+        td = '{{relay.id}}'
+        td = '{{relay.title}}'
+        td = '{{relay.max_logs_size}}'
+        td
+          div  v-if = "relay.active_relay_destination"
+            |{{relay.active_relay_destination.base_url}}
+        td
+          = link_to 'Detail', '/relays/{{relay.id}}', class: 'btn btn-default btn-sm'
+          |&nbsp;
+          = link_to 'Logs', '/relays/{{relay.id}}/relay_logs', class: 'btn btn-default btn-sm'
+          |&nbsp;
+          = link_to 'Edit', '/relays/{{relay.id}}/edit', class: 'btn btn-default btn-sm'
+          |&nbsp;
+          = link_to 'Destroy', '/relays/{{relay.id}}', data: { confirm: 'Are you sure?' }, method: :delete, class: 'btn btn-danger btn-sm'

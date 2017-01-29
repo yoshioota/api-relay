@@ -1,0 +1,1 @@
+json.partial! "relay_destinations/relay_destination", relay_destination: @relay_destination

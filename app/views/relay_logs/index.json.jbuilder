@@ -1,0 +1,1 @@
+json.array! @relay_logs, partial: 'relay_logs/relay_log', as: :relay_log

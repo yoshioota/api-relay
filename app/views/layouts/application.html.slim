@@ -1,0 +1,29 @@
+doctype html
+html
+  head
+    title
+      = content_for?(:before_title) ? yield(:before_title) : ''
+      = title_helper
+    = csrf_meta_tags
+
+    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+
+  body
+    nav.navbar.navbar-default.navbar-static-top role="navigation"
+      .container-fluid
+        .navbar-header
+          button.navbar-toggle.collapsed data-target="#top-navbar" data-toggle="collapse" type="button"
+            span.icon-bar
+            span.icon-bar
+            span.icon-bar
+
+        #top-navbar.navbar-collapse.collapse
+          ul.nav.navbar-nav
+            li
+              = link_to 'Relays', relays_path
+
+    .top-container*{class: content_for?(:container) ? yield(:container) : 'container-fluid'}
+      ol.breadcrumb
+        = render_breadcrumbs tag: :li, separator: ''
+      = yield
